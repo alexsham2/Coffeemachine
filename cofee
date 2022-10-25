@@ -1,0 +1,166 @@
+package machine
+
+class Cofee (var _water:Int = 400, var _milk:Int = 540, var _coffeBeans:Int = 120, var _cups:Int = 9, var _money:Int = 550){
+    fun prodCheck ()  {
+    }
+
+
+    }
+    fun cooking ()
+    {
+        println("""
+Starting to make a coffee
+Grinding coffee beans
+Boiling water
+Mixing boiled water with crushed coffee beans
+Pouring coffee into the cup
+Pouring some milk into the cup
+Coffee is ready!            
+        """.trimIndent())
+    }
+
+
+fun main() {
+    val cofee = Cofee()
+    fun proverka (){
+        println("The coffee machine has:")
+        println("${cofee._water} ml of water")
+        println("${cofee._milk} ml of milk")
+        println("${cofee._coffeBeans} g of coffee beans")
+        println("${cofee._cups} disposable cups")
+        println("$${cofee._money} of money")
+        println("")
+        println("Write action (buy, fill, take, remaining, exit)")
+
+    }
+    fun add () {
+        println("")
+        println("Write how many ml of water you want to add: ")
+        cofee._water += readln().toInt()
+        println("Write how many ml of milk you want to add: ")
+        cofee._milk += readln().toInt()
+        println("Write how many grams of coffee beans you want to add:")
+        cofee._coffeBeans += readln().toInt()
+        println("Write how many disposable cups you want to add: ")
+        cofee._cups += readln().toInt()
+        println("")
+        println("Write action (buy, fill, take, remaining, exit)")
+
+    } /* Добавляем */
+    fun money ()
+    {
+        println("I gave you $${cofee._money}")
+        cofee._money = 0
+        println("")
+        println("Write action (buy, fill, take, remaining, exit)")
+    }
+    fun espresso () {
+        cofee._water -= 250
+        cofee._coffeBeans -=16
+        --cofee._cups
+        cofee._money +=4
+
+    }
+    fun latte(){
+        cofee._water -= 350
+        cofee._milk -= 75
+        cofee._coffeBeans -= 20
+        --cofee._cups
+        cofee._money += 7
+
+    }
+    fun capuch() {
+        cofee._water -= 200
+        cofee._milk -= 100
+        cofee._coffeBeans -= 12
+        --cofee._cups
+        cofee._money += 6
+
+    }
+
+    fun pokupka () {
+        println("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino,")
+        println("back - to main menu:")
+        val type = readln()
+        when (type){
+            ("1") -> {
+                if (cofee._water >= 250 && cofee._coffeBeans >= 16 && cofee._cups >= 1)
+                {println("I have enough resources, making you a coffee!")
+                    espresso()
+                    println("")
+                    println("Write action (buy, fill, take, remaining, exit)")
+
+
+                }
+                else {
+                    when {
+                        cofee._water < 250 -> println("Sorry, not enough water!")
+                        cofee._coffeBeans < 16 -> println("Sorry, not enough coffee beans!")
+                        cofee._cups < 1 -> println("Sorry, not enough disposable cups")
+
+                    }
+
+                    println("")
+                    println("Write action (buy, fill, take, remaining, exit)")
+            }}
+            ("2") -> {
+                if (cofee._water >= 350 && cofee._milk >= 75 && cofee._coffeBeans >= 20 && cofee._cups >= 1)
+                {println("I have enough resources, making you a coffee!")
+                    latte()
+                    println("")
+                    println("Write action (buy, fill, take, remaining, exit)")
+
+                }
+                else {
+                    when {
+                        cofee._water < 350 -> println("Sorry, not enough water!")
+                        cofee._milk < 75 -> println("Sorry< not enough milk")
+                        cofee._coffeBeans < 20 -> println("Sorry, not enough coffee beans!")
+                        cofee._cups < 1 -> println("Sorry, not enough disposable cups")
+
+                    }
+
+                    println("")
+                    println("Write action (buy, fill, take, remaining, exit)")
+                }}
+            ("3") -> {
+                if (cofee._water >= 200 && cofee._milk >= 100 && cofee._coffeBeans >= 12 && cofee._cups >= 1)
+                {println("I have enough resources, making you a coffee!")
+                    capuch()
+                    println("")
+                    println("Write action (buy, fill, take, remaining, exit)")
+
+                }
+                else {
+                    when {
+                        cofee._water < 350 -> println("Sorry, not enough water!")
+                        cofee._milk < 75 -> println("Sorry< not enough milk")
+                        cofee._coffeBeans < 20 -> println("Sorry, not enough coffee beans!")
+                        cofee._cups < 1 -> println("Sorry, not enough disposable cups")
+
+                    }
+
+                    println("")
+                    println("Write action (buy, fill, take, remaining, exit)")
+                }}
+            ("back") -> println("Write action (buy, fill, take, remaining, exit)")
+        }
+    }
+   println("Write action (buy, fill, take, remaining, exit)")
+   do {
+        val choise = readln()
+
+        when (choise) {
+            ("buy") -> pokupka()
+
+            ("fill") -> add()
+
+            ("take") -> money()
+
+            ("remaining") -> proverka()
+
+        }
+
+
+    } while (choise!="exit")
+}
